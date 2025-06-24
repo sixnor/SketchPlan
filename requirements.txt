@@ -6,3 +6,5 @@ clarabel
 viser==0.2.23
 transformers==4.49.0
 diffusers==0.32.2
+einops
+ema-pytorch
