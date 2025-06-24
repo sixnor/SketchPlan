@@ -47,7 +47,7 @@ gsplat = GSplatLoader(Path(splatjson["flight"]["configYML"]), device)
 intrinsics = loadJSON("drawing/data/intrinsics.json")["zed720prect"]
 robot_radius = 0.144
 
-data_folder = "drawing/data2/"
+data_folder = "drawing/data/"
 cond_switch = 0.8
 resizeshape = (224,224) # Set to None to preserve original size
 mode = "d" # d or rgb

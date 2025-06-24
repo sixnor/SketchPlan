@@ -10,7 +10,7 @@ from drawing.projectUtils import reproject2Dto3D, checkTrajCollision, loadJSON, 
 import pandas as pd
 import json
 from drawing.trainer import Trainer
-from drawing.lossFuncs import HalfSpaceLoss, MSELoss, MaximumAxisLoss, ComboLoss, NNLoss
+from drawing.lossFuncs import HalfSpaceLoss, MSELoss, MaximumAxisLoss, ComboLoss
 import os
 from drawing.dataset import SketchPreFetchDataset
 
@@ -21,7 +21,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 ### PARAMETERS HERE ###
 
-data_folder = "drawing/data2/"
+data_folder = "drawing/data/"
 camera_make = "zed720prect"
 dfname = "allflight"
 

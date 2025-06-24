@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from torch_kdtree import build_kd_tree
+
 
 class HalfSpaceLoss(nn.Module):
     def __init__(self, alpha, barrier=torch.nn.functional.elu, margin=0.1):
@@ -77,27 +77,6 @@ class MaximumAxisLoss(nn.Module):
 
         return total_loss
 
-
-class NNLoss(nn.Module):
-    def __init__(self, means, margin, barrier=torch.relu):
-        super(NNLoss, self).__init__()
-        self.means = means
-        self.margin = margin
-        self.barrier = barrier
-
-        self.tree = build_kd_tree(means, device=means.device)
-
-    def forward(self, outputs, datadict):
-        c2ws = datadict["c2ws"]
-        scene_scales = datadict["scene_scales"]
-        aff = c2ws[:,:-1,:-1] * scene_scales.view((-1,1,1))
-        trans = c2ws[:,:-1,-1]
-        retrajs = torch.baddbmm(trans.view((-1,1,3)),outputs, aff.mT)
-
-        dists, inds = self.tree.query(retrajs.view((-1,3)))
-
-        loss = torch.mean(self.barrier(-(dists - self.margin)))
-        return loss
 class MSELoss(nn.Module):
     def __init__(self):
         super(MSELoss, self).__init__()
